@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
+        ls
         cd dockerfile
         docker build -t ml:latest .
         
@@ -26,6 +27,4 @@ jobs:
       run: sleep 5
       
     - name: Run Test Script
-      run: | 
-        cd ..
-        ./test_script.sh
+      run: ./test_script.sh
