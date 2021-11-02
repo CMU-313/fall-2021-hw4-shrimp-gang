@@ -26,6 +26,4 @@ jobs:
       run: sleep 5
       
     - name: Run Test Script
-      run: |
-        cd ..
-        ./test-script.sh
+      run: ./test-script.sh
