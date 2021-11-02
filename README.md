@@ -5,27 +5,36 @@ The model within the repository is used to predict the G3 performance of student
 ## How to Deploy the Microservice
 
 The microservice utilizes Flask for the application interface and is deployed in a Docker container. After cloning the repo you must 
-(1) - Change directory to dockerfile
+
+  (1) - Change directory to dockerfile
 run <cd dockerfile> from the main directory /fall-2021-hw4-shrimp-gang
-(2) - Build the container
-run <docker build -t ml:latest .>
-(3) - Run the container
-We run the container on port 5000 with <docker run -d -p 5000:5000 ml>
+
+  (2) - Build the container
+run `docker build -t ml:latest .`
+
+  (3) - Run the container
+We run the container on port 5000 with `docker run -d -p 5000:5000 ml`
 
 ## API Documentation
 The microservice has one endpoint
 
-/predict
+#### /predict
+  
 Predict takes in 6 parameters, the number of features that we predict a quality student based on, and return 1 for a student that would be admitted to the school or zero for the negative case. When calling predict, enter the url as follows and place the appropriate arguments in this format where the letters are integers that are within the bounds that as described below the format.
 
 format for url >>  localhost:5000/predict?studytime=x&absences=y&goout=z&Dalc=a&G1=b&G2=c
 
-Studytime: weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
-Absences: number of school absences (numeric: from 0 to 93)
-Goout: going out with friends (numeric: from 1 - very low to 5 - very high)
-Dalc: workday alcohol consumption (numeric: from 1 - very low to 5 - very high)
-G1: first period grade (numeric: from 0 to 20)
-G2: second period grade (numeric: from 0 to 20)
+  1. Studytime: weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
+
+  2. Absences: number of school absences (numeric: from 0 to 93)
+
+  3. Goout: going out with friends (numeric: from 1 - very low to 5 - very high)
+
+  4. Dalc: workday alcohol consumption (numeric: from 1 - very low to 5 - very high)
+
+  5. G1: first period grade (numeric: from 0 to 20)
+
+  6. G2: second period grade (numeric: from 0 to 20)
 
 Note that /predict automatically checks for missing parameters and correct parameter types, you will receive a 400 error with a small description of what is incorrect or missing.
 
@@ -55,3 +64,5 @@ We see high precision and recall. When we correctly flag a student as quality, w
 
 ## Testing the Model
 Automatic testing is done via the bash script in Github actions. The tests encompass both expected results and API effectiveness. A github actions task is run that does multiple requests on our predict endpoint expecting zeroes and ones for qualified and unqualified students.
+  
+If users want to test the model locally simply deploy as above and run the `./test_script.sh` command in the top level directory
