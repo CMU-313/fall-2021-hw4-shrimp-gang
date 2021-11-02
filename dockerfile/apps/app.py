@@ -12,15 +12,21 @@ def hello():
 @app.route('/predict')
 def predict():
 	 #use entries from the query string here but could also use json
-     age = request.args.get('age')
+     studytime = request.args.get('studytime')
      absences = request.args.get('absences')
-     health = request.args.get('health')
-     data = [[age],[health],[absences]]
-     query_df = pd.DataFrame({ 'age' : pd.Series(age) ,'health' : pd.Series(health) ,'absences' : pd.Series(absences)})
-     query = pd.get_dummies(query_df)
-     prediction = clf.predict(query)
-     return jsonify(np.asscalar(prediction))
+     goout = request.args.get('goout')
+     dalc = request.args.get('Dalc')
+     G1 = request.args.get('G1')
+     G2 = request.args.get('G2')
+
+
+     data = [[studytime],[absences],[dalc],[goout],[G1],[G2]]
+     query_df = pd.DataFrame({ 'studytime' : pd.Series(studytime) ,'goout' : pd.Series(goout),'Dalc' : pd.Series(dalc), 
+     'absences' : pd.Series(absences) ,'G1' : pd.Series(G1), 'G2' : pd.Series(G2)
+    })
+     prediction = clf.predict(query_df)
+     return jsonify(np.asscalar(prediction))     
 
 if __name__ == '__main__':
-    clf = joblib.load('/apps/model.pkl')
+    clf = joblib.load('/apps/model1.pkl')
     app.run(host="0.0.0.0", debug=True)
