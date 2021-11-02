@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        cd dockerfile
+        docker build -t ml:latest .
+        
+    - name: Run microservice
+      run: docker run -d -p 5000:5000 ml
+      
+    - name: Sleep while booting
+      run: sleep 5
+      
+    - name: Run Test Script
+      run: |
+        cd ..
+        ./test-script.sh
