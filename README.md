@@ -39,6 +39,7 @@ format for url >>  localhost:5000/predict?studytime=x&absences=y&goout=z&Dalc=a&
 Note that /predict automatically checks for missing parameters and correct parameter types, you will receive a 400 error with a small description of what is incorrect or missing.
 
 ## Model Description - Features and Retraining
+The model is generated from Decision_Tree_Six_Facotr.ipynb file.
 We used a decision tree classifier for our model. The features we trained on include all the features that can be run on predict
 
 Studytime: weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours)
@@ -48,7 +49,7 @@ Dalc: workday alcohol consumption (numeric: from 1 - very low to 5 - very high)
 G1: first period grade (numeric: from 0 to 20)
 G2: second period grade (numeric: from 0 to 20)
 
-After training on a multitude of features, it was seen that studytime, absences, goout, dalc have high correlation with G3 (larger than 0.05). Furthermore G1, G2 were seen to be the most correlated variables and are a great predictor for the final grade that a student will potentially see. There were other quality variables that are correlated, when combinding these other quality variables we obtain a very random distribution that does not match what one would expect with the data, for instance a graph on activities and health had little correlation together while studytime and goout had a normal distribution when plotting against a high G3.
+After training on a multitude of features, it was seen that studytime, absences, goout, dalc have high correlation with G3 (larger than 0.05). Furthermore G1, G2 were seen to be the most correlated variables and are a great predictor for the final grade that a student will potentially see. There were other quality variables that are correlated, when combinding these other quality variables we obtain a very random distribution that does not match what one would expect with the data, for instance a graph on activities and health had little correlation together while studytime and goout had a normal distribution when plotting against a high G3. Above evidences can be found in the data preprocessing section of Decision_Tree_Six_Facotr.ipynb file.
   
 When looking at the baseline model, which considered age, absences, and health, we find the following results:
   - Precision is  0.7441860465116279
